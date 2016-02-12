@@ -14,7 +14,7 @@ gpio -g write 22 1
 
 while [ 1 ]; do
   if [ "$(/home/pi/wiringPi/gpio/gpio -g read 17)" = "1" ]; then
-        echo "ShutDown order received, RaspBerry pi will now enter in standby m$
+        echo "ShutDown order received, RaspBerry pi will now enter in standby mode..."
         sudo shutdown -h -P now
         break
   fi
