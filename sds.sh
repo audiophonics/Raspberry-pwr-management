@@ -2,7 +2,7 @@
 
 PATH=/usr/bin:/home/pi/wiringPi/gpio
 
-echo "ShutDown_Script script starting..."
+echo "Audiophonics Shutdown script starting..."
 echo "Asserting pins : "
 echo "ShutDown : GPIO17=in, Low"
 echo "BootOK   : GPIO22=out, High"
