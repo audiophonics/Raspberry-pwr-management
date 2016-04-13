@@ -1,4 +1,5 @@
 #!/bin/bash
+#Volumio version
 
 PATH=/usr/bin:/home/pi/wiringPi/gpio
 
