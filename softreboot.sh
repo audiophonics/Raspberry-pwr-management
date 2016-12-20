@@ -1,4 +1,4 @@
-!/bin/bash
+#!/bin/bash
 # Audiophonics
 # Shutdown detection script
 # Script to set GPIO 4 High for 1sec
