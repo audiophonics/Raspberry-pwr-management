@@ -7,7 +7,10 @@ echo "Audiophonics Shutdown script starting..."
 echo "Asserting pins : "
 echo "ShutDown : GPIO17=in, Low"
 echo "BootOK   : GPIO22=out, High"
+echo "SoftSD   : GPIO04=out, Low"
 
+gpio -g mode 04 out
+gpio -g write 04 0
 gpio -g mode 17 in
 gpio -g write 17 0
 gpio -g mode 22 out
