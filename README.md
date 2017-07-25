@@ -25,3 +25,8 @@
 	sudo wget https://github.com/audiophonics/Raspberry-pwr-management/raw/master/softshutdown.sh -O /usr/lib/audiophonics/softshutdown.sh
 	sudo chmod +x /usr/lib/audiophonics/softshutdown.sh
 	sudo ln -s /usr/lib/audiophonics/softshutdown.sh /usr/bin/softshutdown.sh
+
+# Installation on Volumio 2
+
+	Instructions on our Forum
+	http://forum.audiophonics.fr/viewtopic.php?f=12&t=1967&p=7991
