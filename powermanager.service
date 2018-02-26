@@ -1,0 +1,10 @@
+[Unit]
+Description=Audiophonics Power manager
+
+[Service]
+ExecStart=/home/volumio/sds.sh
+Restart=always
+
+
+[Install]
+WantedBy=multi-user.target
