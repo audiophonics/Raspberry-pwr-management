@@ -39,7 +39,8 @@
 	
 	Installation :
 	mkdir ./audiophonicsonoff-plugin
-	miniunzip volsmartpower.zip -d ./audiophonicsonoff-plugin
+	wget https://github.com/Saiyato/volumio-audiophonicsonoff-plugin/raw/master/volumio-audiophonicsonoff-plugin.zip
+	miniunzip volumio-audiophonicsonoff-plugin.zip -d ./audiophonicsonoff-plugin
 	cd ./audiophonicsonoff-plugin
 	volumio plugin install
 	
