@@ -30,3 +30,16 @@
 
 	Instructions on our Forum
 	http://forum.audiophonics.fr/viewtopic.php?f=12&t=1967&p=7991
+
+
+## Volumio 2 Plugin from Saiyato
+
+	Thanks to him for this very nice plugin
+	https://github.com/Saiyato/volumio-audiophonicsonoff-plugin
+	
+	Installation :
+	mkdir ./audiophonicsonoff-plugin
+	miniunzip volsmartpower.zip -d ./audiophonicsonoff-plugin
+	cd ./audiophonicsonoff-plugin
+	volumio plugin install
+	
