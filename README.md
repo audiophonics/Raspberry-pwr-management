@@ -9,7 +9,8 @@
 	sudo ln -s /usr/lib/audiophonics/runeaudio.sds.service /etc/systemd/system/runeaudio.sds.service
 	sudo chmod +x /usr/lib/audiophonics/sds.sh
 	sudo ln -s /usr/lib/audiophonics/sds.sh /usr/local/bin/sds.sh
-
+	
+	sudo systemctl enable runeaudio.sds.service 
 	sudo systemctl start runeaudio.sds.service
 
 ## Installation of soft reboot on vanilla Raspbian
