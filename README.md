@@ -1,5 +1,44 @@
 # Raspberry-pwr-management
 
+## Standard pins are :
+- Boot OK : GPIO 22
+- Shutdown : GPIO 17
+- SoftShutdown : GPIO 4
+
+Allo Digione is using GPIO17, so sds.sh must be modified if using this HAT board. (e.g. 27)
+
+
+## Installation on Moode Audio
+
+	cd /home/pi
+	wget https://raw.githubusercontent.com/audiophonics/Raspberry-pwr-management/master/sds_moode.sh
+	wget https://raw.githubusercontent.com/audiophonics/Raspberry-pwr-management/master/softshutdown_moode.sh
+	mv sds_moode.sh sds.sh
+	mv softshutdown_moode.sh softshutdown.sh
+	sudo chmod +x sds.sh
+	sudo chmod +x softshutdown.sh
+	
+	cd /var/local/www/commandw/
+	sudo nano restart.sh
+
+- Update this section :
+```
+	if [[ $1 = "poweroff" ]]; then
+	mpc stop
+	systemctl stop nginx
+	/home/pi/softshutdown.sh
+	#      poweroff
+	fi
+```
+
+- Add to rc.local before exit :
+
+```
+	sudo nano /etc/rc.local
+	sudo bash /home/pi/sds.sh &
+```
+
+
 ## Installation of power button status on vanilla Raspbian
 
 	sudo mkdir /usr/lib/audiophonics/
