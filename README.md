@@ -31,10 +31,12 @@ Allo Digione is using GPIO17, so sds.sh must be modified if using this HAT board
 	fi
 ```
 
-- Add to rc.local before exit :
+- Edit rc.local :
 
 ```
 	sudo nano /etc/rc.local
+	
+	Add before exit : 
 	sudo bash /home/pi/sds.sh &
 ```
 
