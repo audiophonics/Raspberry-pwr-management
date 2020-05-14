@@ -7,6 +7,16 @@
 
 Allo Digione is using GPIO17, so sds.sh must be modified if using this HAT board. (e.g. 27)
 
+## Using the SPC board with standard RPI power management overlays :
+
+Edit /boot/config.txt, add :
+```
+dtoverlay=gpio-poweroff,gpiopin=22,active_low
+dtoverlay=gpio-shutdown,gpio_pin=17,active_low=0,gpio_pull=down
+```
+That's all, you will be able to control power of the RPI with SPC, having a real power shutdown, and no CPU idle.
+Compatible with most *if not all* distributions.
+However the power will not be cut if you initiate Power Off from software, only from button, this behavior require a script.
 
 ## Installation on Moode Audio
 
