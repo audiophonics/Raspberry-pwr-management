@@ -21,12 +21,7 @@ However the power will not be cut if you initiate Power Off from software, only 
 ## Installation on Moode Audio
 
 	cd /home/pi
-	wget https://raw.githubusercontent.com/audiophonics/Raspberry-pwr-management/master/sds_moode.sh
-	wget https://raw.githubusercontent.com/audiophonics/Raspberry-pwr-management/master/softshutdown_moode.sh
-	mv sds_moode.sh sds.sh
-	mv softshutdown_moode.sh softshutdown.sh
-	sudo chmod +x sds.sh
-	sudo chmod +x softshutdown.sh
+	wget https://raw.githubusercontent.com/audiophonics/Raspberry-pwr-management/master/spc_moode.py
 	
 	cd /var/local/www/commandw/
 	sudo nano restart.sh
@@ -36,7 +31,7 @@ However the power will not be cut if you initiate Power Off from software, only 
 	if [[ $1 = "poweroff" ]]; then
 	mpc stop
 	systemctl stop nginx
-	/home/pi/softshutdown.sh
+	python /home/pi/spc_moode.py shutdown
 	#      poweroff
 	fi
 ```
@@ -47,7 +42,7 @@ However the power will not be cut if you initiate Power Off from software, only 
 	sudo nano /etc/rc.local
 	
 	Add before exit : 
-	sudo bash /home/pi/sds.sh &
+	python /home/pi/spc_moode.py &
 ```
 
 
