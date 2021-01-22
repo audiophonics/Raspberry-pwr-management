@@ -49,7 +49,7 @@ def boot():
        print ("Setting BootOK output High")
        GPIO.output(22,GPIO.HIGH)
        break
-       time.sleep(5)
+     time.sleep(2)
 
     # Button shutdown loop :
     while True :
@@ -57,7 +57,7 @@ def boot():
             print "ShutDown order received, RaspBerry pi will now shutdown..."
             os.system ('sudo /usr/sbin/shutdown -h -P now')
             break
-        time.sleep(5)
+        time.sleep(2)
     sys.exit()
 
 def shutdown():
