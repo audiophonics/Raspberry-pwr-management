@@ -54,7 +54,7 @@ def boot():
     # Button shutdown loop :
     while True :
         if GPIO.input(17) == 1: 
-            print "ShutDown order received, RaspBerry pi will now shutdown..."
+            print ("ShutDown order received, RaspBerry pi will now shutdown...")
             os.system ('sudo /usr/sbin/shutdown -h -P now')
             break
         time.sleep(2)
@@ -84,10 +84,10 @@ def reboot():
 if len(sys.argv) == 1 :
     boot()
 elif sys.argv[1] == 'reboot':
-    print 'Argument:', sys.argv[1]
+    print ('Argument:', sys.argv[1])
     reboot()
 elif sys.argv[1] == 'shutdown':
-    print 'Argument:', sys.argv[1]
+    print ('Argument:', sys.argv[1])
     shutdown()
 else:
     print ("No valid argument, use nothing, reboot or shutdown")
