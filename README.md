@@ -18,7 +18,7 @@ tar -xzf moode_dev.tar.gz
 cd "Raspberry-pwr-management-moode_dev"
 sudo sh pispcii install moode                                                                
 cd ~
-rm -rf moode_dev.tar.gz Raspberry-pwr-management-moode_dev
+rm -f moode_dev.tar.gz
 sudo reboot
 
 ```
