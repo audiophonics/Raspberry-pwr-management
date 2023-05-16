@@ -42,3 +42,9 @@ Using this software will use the GPIO pins
 * 22
 
 *Please make sure none of them are used by any other process.*
+
+
+
+## TESTED ON 
+* moodeAudio 8.3.2 64bit (Rasptouch)
+* moodeAudio 8.3.2 32bit (Rasptouch)
