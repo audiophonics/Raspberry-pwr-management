@@ -1,0 +1,118 @@
+#!/bin/sh
+
+GPIO_BOOTOK=22
+GPIO_SOFTSHUTDOWN=4
+GPIO_SHUTDOWN=17
+STRING_A="dtoverlay=gpio-poweroff,gpiopin=22,active_low"
+STRING_B="dtoverlay=gpio-shutdown,gpio_pin=17,active_low=0,gpio_pull=down"
+selfpath=$(readlink -f $0)
+
+printhelp(){
+echo "$0 install [distribution (moode/pcp)]"
+echo "$0 poweroff"
+echo "$0 reboot"
+}
+
+
+emit_softshutdown(){
+echo "[PI-SPC] emitting softshutdown signal through GPIO $GPIO_SOFTSHUTDOWN"
+gpioset gpiochip0 "$GPIO_SOFTSHUTDOWN"=1; 
+sleep 0.8
+gpioset gpiochip0 "$GPIO_SOFTSHUTDOWN"=0;
+sleep 1
+exit 0
+}
+
+emit_softreboot(){
+echo "[PI-SPC] emitting softreboot signal through GPIO $GPIO_SOFTSHUTDOWN"
+gpioset gpiochip0 "$GPIO_SOFTSHUTDOWN"=1; 
+sleep 1.2
+gpioset gpiochip0 "$GPIO_SOFTSHUTDOWN"=0; 
+exit 0
+}
+
+
+# --------------------------- 	 	Installing	 ---------------------------
+
+install(){
+chmod +x "$selfpath"
+grep -q "$STRING_A" /boot/config.txt
+if [ $? -ne 0 ]; then
+echo "$STRING_A" >> /boot/config.txt
+fi
+
+grep -q "$STRING_B" /boot/config.txt
+if [ $? -ne 0 ]; then
+echo "$STRING_B" >> /boot/config.txt
+fi
+
+case "$1" in
+   "moode")
+		apt-get update > /dev/null 2>&1
+		apt-get -y install gpiod > /dev/null 2>&1
+		install_systemd_moode
+	;;
+   *)
+     echo "No specific distribution specified, the softshutdown / softreboot functions may not be working properly (that is to say the controller might not be aware that you asked for a shutdown /reboot directly in the software instead of using the hardware button)"
+    ;;
+esac
+
+echo "Installation complete. You should reboot now."
+
+}
+
+# --------------------------- 	 	Uninstalling	 ---------------------------
+uninstall(){
+
+grep -q "$STRING_A" /boot/config.txt
+if [ $? -eq 0 ]; then
+sed -i "/$STRING_A/d" /boot/config.txt
+fi
+
+grep -q "$STRING_B" /boot/config.txt
+if [ $? -eq 0 ]; then
+sed -i "/$STRING_B/d" /boot/config.txt
+fi
+
+case "$1" in
+   "moode")
+    uninstall_systemd_moode
+    ;;
+    *)
+    echo "No specific distribution specified, if you did specify one while installing, some functions may not still be installed in systemd"
+    ;;
+esac
+
+}
+
+
+# --------------------------- 		Distribution specifics	 ---------------------------
+
+# - moodeAudio 		
+install_systemd_moode(){
+ln -s -f "$selfpath" /lib/systemd/system-shutdown/
+}
+
+uninstall_systemd_moode(){
+rm /lib/systemd/system-shutdown/$0
+}
+
+
+# --------------------------- 	 	handle params	 ---------------------------
+case $1 in
+   "poweroff")
+      emit_softshutdown
+      ;;
+   "reboot")
+      emit_softreboot
+      ;;
+   "install")
+      install $2
+      ;;
+   "uninstall")
+      uninstall $2
+      ;;
+   *)
+     printhelp
+     ;;
+esac
